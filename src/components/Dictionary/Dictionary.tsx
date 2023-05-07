@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import { selectWords } from '../../redux/slices/wordsSlice';
-import { Word } from '../../types/Word';
 
 export const Dictionary: React.FC = () => {
   const words = useAppSelector(selectWords);
@@ -15,8 +14,8 @@ export const Dictionary: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        {words.map((word: Word, index: number) => (
-          <tr key={index}>
+        {words.map((word) => (
+          <tr key={word.eng}>
             <td>{word.eng}</td>
             <td>{word.ukr}</td>
           </tr>
