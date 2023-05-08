@@ -1,0 +1,85 @@
+.add-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 60%;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+
+    @media (max-width: 1000px) {
+      width: 80%;
+    }
+  }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    cursor: pointer;
+  }
+
+  &__input {
+    height: 40px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+
+  &__button {
+    display: inline-block;
+    align-self: center;
+
+    width: 300px;
+    margin-top: 16px;
+    padding: 12px 24px;
+
+    border: none;
+    border-radius: 10px;
+
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    background-color: #c9f1b4;
+
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      width: 150px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
