@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import cn from 'classNames';
+import cn from 'classnames';
 
 import { useAppSelector } from '../../redux/hooks';
 import { selectQuizHistory } from '../../redux/slices';
