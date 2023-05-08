@@ -22,10 +22,16 @@ export const WordQuiz: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const generateQuestions = () => {
-    const randomQuestionList = createRandomQuestionList(wordList, TOTAL_QUESTIONS, TOTAL_OPTIONS);
-    setQuestions(randomQuestionList);
-    setQuestionIndex(0); // reset question index on new question list
-    setScore(0); // reset score on new question list
+    if (wordList.length >= 10) {
+      const randomQuestionList = createRandomQuestionList(wordList, TOTAL_QUESTIONS, TOTAL_OPTIONS);
+      setQuestions(randomQuestionList);
+      setQuestionIndex(0); // reset question index on new question list
+      setScore(0); // reset score on new question list
+    } else {
+      setQuestions([]); // set questions to empty array if wordList has less than 10 words
+      setQuestionIndex(0); // reset question index
+      setScore(0); // reset score
+    }
   };
 
   useEffect(() => {
