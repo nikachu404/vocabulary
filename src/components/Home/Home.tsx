@@ -36,7 +36,14 @@ export const Home: React.FC = () => {
       )}
 
       <div className="home__sidebar">
-        <Link to="/add" className="home__add-word">Expand your lexicon!</Link>
+        <Link to="/add" className="home__add-word">
+          <p className="home__add-word-text">Expand your lexicon!</p>
+          <img
+            src="https://img.icons8.com/ios-glyphs/30/null/plus-math.png"
+            className="home__add-word-icon"
+            alt="add"
+          />
+        </Link>
 
         <div className="home__activity">
           <h2>Recent activity</h2>

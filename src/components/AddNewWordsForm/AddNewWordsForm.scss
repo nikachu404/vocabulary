@@ -67,6 +67,8 @@
     font-size: 16px;
     background-color: #c9f1b4;
 
+    color: #1e1d30;;
+
     cursor: pointer;
 
     &:disabled {
@@ -76,6 +78,14 @@
     @media (max-width: 768px) {
       width: 150px;
     }
+
+    &--starter {
+      background-color: #f3be88;
+    }
+  }
+
+  &__text {
+    align-self: center;
   }
 
   &__form {

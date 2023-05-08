@@ -1,38 +1,11 @@
-// import React from 'react';
-// import { NavLink } from 'react-router-dom';
-
-// import './Navigation.scss';
-
-// export const Navigation: React.FC = () => {
-//   return (
-//     <header className="navigation">
-//       <nav className="navigation__container">
-//         <ul className="navigation__nav-list">
-//           <li className="navigation__nav-item">
-//             <img src="https://img.icons8.com/dusk/64/null/vocabulary.png" className="navigation__icon" />
-//             <NavLink to="/" className="navigation__nav-link">Home</NavLink>
-//           </li>
-
-//           <li className="navigation__nav-item">
-//             <img src="https://img.icons8.com/dusk/64/null/questions.png" className="navigation__icon" />
-//             <NavLink to="/quiz" className="navigation__nav-link">Quiz</NavLink>
-//           </li>
-//         </ul>
-
-//         <div className="navigation__stats">
-//           My stats
-//         </div>
-//       </nav>
-//     </header>
-//   );
-// };
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import cn from 'classNames';
 
-
-import './Navigation.scss';
 import { useAppSelector } from '../../redux/hooks';
 import { selectQuizHistory } from '../../redux/slices';
+
+import './Navigation.scss';
 
 export const Navigation: React.FC = () => {
   const quizHistory = useAppSelector(selectQuizHistory);
@@ -54,12 +27,28 @@ export const Navigation: React.FC = () => {
         <ul className="navigation__nav-list">
           <li className="navigation__nav-item">
             <img src="https://img.icons8.com/dusk/64/null/dictionary.png" className="navigation__icon" />
-            <NavLink to="/" className="navigation__nav-link">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                cn('navigation__nav-link',
+                  { 'navigation__nav-link--selected': isActive })
+              }
+            >
+              Home
+            </NavLink>
           </li>
 
           <li className="navigation__nav-item">
             <img src="https://img.icons8.com/dusk/64/null/questions.png" className="navigation__icon" />
-            <NavLink to="/quiz" className="navigation__nav-link">Quiz</NavLink>
+            <NavLink
+              to="/quiz"
+              className={({ isActive }) =>
+                cn('navigation__nav-link',
+                  { 'navigation__nav-link--selected': isActive })
+              }
+            >
+              Quiz
+            </NavLink>
           </li>
         </ul>
 
