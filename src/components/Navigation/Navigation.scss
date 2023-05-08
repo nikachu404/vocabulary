@@ -39,6 +39,7 @@
     @media (max-width: 1000px) {
       display: flex;
       justify-content: flex-end;
+      z-index: 10;
     }
   }
 
@@ -61,6 +62,12 @@
     font-weight: bold;
     color: #958f97;
     text-decoration: none;
+
+
+    &--selected {
+      color: #8d6c9f;
+      text-decoration: underline;
+    }
   }
 
   &__icon {
