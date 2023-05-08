@@ -1,12 +1,19 @@
 import { Question, Word } from '../types';
-import { createRandomQuestion } from './createRandomQuestion';
+import { createRandomTranslations } from './createRandomTranslations';
 
-export const createRandomQuestionList = (wordList: Word[], questionQty: number, optioonsQty: number): Question[] => {
+export const createRandomQuestionList = (wordList: Word[], questionQty: number, optionsQty: number): Question[] => {
   const randomQuestionList: Question[] = [];
 
-  for (let i = 0; i < questionQty; i++) {
-    const { word, translations, correctAnswerIndex } = createRandomQuestion(wordList, optioonsQty);
-    randomQuestionList.push({ word, translations, correctAnswerIndex });
+  const uniqueWords = new Set();
+  while (uniqueWords.size < questionQty) {
+    const randomWord: Word = wordList[Math.floor(Math.random() * wordList.length)];
+
+    if (!uniqueWords.has(randomWord.eng)) {
+      uniqueWords.add(randomWord.eng);
+      const randomTranslations: string[] = createRandomTranslations(randomWord, wordList, optionsQty);
+      const correctAnswerIndex = randomTranslations.indexOf(randomWord.ukr);
+      randomQuestionList.push({ word: randomWord.eng, translations: randomTranslations, correctAnswerIndex });
+    }
   }
 
   return randomQuestionList;

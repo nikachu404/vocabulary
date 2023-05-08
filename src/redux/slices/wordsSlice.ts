@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { Word } from '../../types/Word';
 import { RootState } from '../store';
+import { Word } from '../../types';
 
 interface WordsState {
   words: Word[]
@@ -15,7 +15,7 @@ export const wordsSlice = createSlice({
   name: 'words',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<Word>) => {
+    addWord: (state, action: PayloadAction<Word>) => {
       const newWord: Word = {
         eng: action.payload.eng.toLowerCase(),
         ukr: action.payload.ukr.toLowerCase(),
@@ -30,6 +30,6 @@ export const wordsSlice = createSlice({
   }
 });
 
+export const { addWord } = wordsSlice.actions;
 export const selectWords = (state: RootState) => state.words.words;
-export const { add } = wordsSlice.actions;
 export const wordsReducer = wordsSlice.reducer;

@@ -1,14 +1,17 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './components/Header/Header';
+import { Navigation } from './components';
 
-import './App.css';
+import './App.scss';
 
 export const App: React.FC = () => {
   return (
-    <>
-      <Header />
-      <Outlet />
-    </>
+    <div className='App'>
+      <Navigation />
+
+      <div className="App__main">
+        <Outlet />
+      </div>
+    </div>
   );
 };

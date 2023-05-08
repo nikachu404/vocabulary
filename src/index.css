@@ -1,3 +1,10 @@
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: 'Comfortaa';
+  color: #1e1d30;
 }

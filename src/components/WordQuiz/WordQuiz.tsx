@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectWords } from '../../redux/slices/wordsSlice';
+import { useAppDispatch } from '../../redux/hooks';
+import { selectWords, addResult } from '../../redux/slices';
 import { Word, Question } from '../../types';
 import { createRandomQuestionList } from '../../helpers/createRandomQuestionList';
+
+import './WordQuiz.scss';
 
 const TOTAL_QUESTIONS = 10;
 const TOTAL_OPTIONS = 3;
 
 export const WordQuiz: React.FC = () => {
   // state variables
-  const [started, setStarted] = useState<boolean>(false);
-  const [questionIndex, setQuestionIndex] = useState<number>(0);
-  const [score, setScore] = useState<number>(0);
+  const [started, setStarted] = useState(false);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState<Question[]>([]);
 
   // redux state
   const wordList: Word[] = useSelector(selectWords);
+  const dispatch = useAppDispatch();
 
-  // lifecycle methods
+  const generateQuestions = () => {
+    const randomQuestionList = createRandomQuestionList(wordList, TOTAL_QUESTIONS, TOTAL_OPTIONS);
+    setQuestions(randomQuestionList);
+    setQuestionIndex(0); // reset question index on new question list
+    setScore(0); // reset score on new question list
+  };
+
   useEffect(() => {
-    if (wordList.length > 0) {
-      const randomQuestionList = createRandomQuestionList(wordList, TOTAL_QUESTIONS, TOTAL_OPTIONS);
-      setQuestions(randomQuestionList);
+    if (wordList.length >= 10) {
+      generateQuestions();
     }
   }, [wordList]);
 
   // event handlers
   const handleStart = (): void => {
     setStarted(true);
+    generateQuestions();
   };
 
   const handleAnswer = (answer: string): void => {
@@ -40,43 +50,62 @@ export const WordQuiz: React.FC = () => {
   };
 
   const handleRestart = (): void => {
-    setStarted(false);
-    setQuestionIndex(0);
-    setScore(0);
+    setStarted(true);
+    generateQuestions();
   };
 
   // rendering logic
   if (!started) {
-    return <button onClick={handleStart}>Start Quiz</button>;
+    return (
+      <div className="quiz__container">
+        <img src='https://media.giphy.com/media/1oBwBVLGoLteCP2kyD/giphy.gif' className="quiz__gif" />
+        <h2>Test your vocabulary</h2>
+        <button onClick={handleStart} className="quiz__button">
+          Start Quiz!
+        </button>
+      </div>
+    );
   }
 
-  if (wordList.length === 0) {
+  if (wordList.length < 10) {
     return (
       <div>
-        <h2>No words yet ;(</h2>
+        <h2>Need at least 10 words to start quiz ;(</h2>
       </div>
     );
   }
 
   if (questionIndex === TOTAL_QUESTIONS) {
+    const percentageResult = Math.round((score / TOTAL_QUESTIONS) * 100); // calculate percentage
+
+    const date = new Date();
+    const formattedDate = date.toLocaleString();
+    dispatch(addResult({ date: formattedDate, score: `${percentageResult}%` })); // dispatch quiz result
+
     return (
-      <div>
+      <div className="quiz__container">
         <h2>Quiz Completed!</h2>
-        <p>Your score is {score} out of {TOTAL_QUESTIONS}</p>
-        <button onClick={handleRestart}>Start Again</button>
+        <p>Your result: {percentageResult}%</p>
+        <button onClick={handleRestart} className="quiz__button">Start Again</button>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="word-quiz">
       <h2>Question {questionIndex + 1}</h2>
       <p>What is the translation of &ldquo;{questions[questionIndex].word}&rdquo;?</p>
-      {questions[questionIndex].translations.map((option, index) => (
-        <button key={index} onClick={() => handleAnswer(option)}>
-          {option}
-        </button>
-      ))}
+      <div className="quiz__question-container">
+        {questions[questionIndex].translations.map((option, index) => (
+          <div
+            key={index}
+            onClick={() => handleAnswer(option)}
+            className="quiz__question"
+          >
+            {option}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
