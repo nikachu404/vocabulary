@@ -49,11 +49,11 @@ export const Home: React.FC = () => {
           <h2>Recent activity</h2>
 
           <div className="home__activity-list">
-            {quizHistoryResults.map((result, index) => {
+            {quizHistoryResults.map((result) => {
               const [date, time] = result.date.split(', ');
 
               return (
-                <div key={index} className="home__activity-result">
+                <div key={result.date} className="home__activity-result">
                   <div className="home__activity-date">
                     <p className="home__activity-day">{date}</p>
                     <p className="home__activity-time">{time}</p>
