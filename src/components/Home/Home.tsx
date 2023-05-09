@@ -53,7 +53,7 @@ export const Home: React.FC = () => {
               const [date, time] = result.date.split(', ');
 
               return (
-                <div key={index} className="home__activity-result">
+                <div key={result.date} className="home__activity-result">
                   <div className="home__activity-date">
                     <p className="home__activity-day">{date}</p>
                     <p className="home__activity-time">{time}</p>
