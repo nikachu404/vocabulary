@@ -35,6 +35,8 @@ export const AddNewWordsForm: React.FC = () => {
 
     if (exists) {
       setError('This word already exists.');
+    } else {
+      setError('');
     }
   };
 
