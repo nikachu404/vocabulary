@@ -104,7 +104,7 @@ export const WordQuiz: React.FC = () => {
       <div className="quiz__question-container">
         {questions[questionIndex].translations.map((option, index) => (
           <div
-            key={index}
+            key={`option-${index}`}
             onClick={() => handleAnswer(option)}
             className="quiz__question"
           >
