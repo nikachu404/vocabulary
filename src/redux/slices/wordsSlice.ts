@@ -21,7 +21,7 @@ export const wordsSlice = createSlice({
         ukr: action.payload.ukr.toLowerCase(),
       };
 
-      const existingWord = state.words.find((word) => word.eng === newWord.eng && word.ukr === newWord.ukr);
+      const existingWord = state.words.find((word) => word.eng === newWord.eng || word.ukr === newWord.ukr);
 
       if (!existingWord) {
         state.words.push(newWord);
