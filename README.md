@@ -28,7 +28,7 @@ Once the test is finished, users are directed to the results screen, which displ
 ```bash 
 npm install
 ```
-4. Add command to terminal:
+4. Run command in terminal
 ```bash 
 npm run dev
 ```
